@@ -364,7 +364,7 @@ const DARE_CHALLENGES = [
 ];
 
 const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-const STORAGE_KEY = 'VNR202_TRUTH_OR_DARE_STATE_V1';
+const STORAGE_KEY = 'VNR202_TRUTH_OR_DARE_STATE_V2';
 
 // ----------------------------------------------------------------------------
 // 2. BỘ TẠO ÂM THANH SÂN KHẤU (WEB AUDIO SYNTHESIZER)
@@ -544,7 +544,7 @@ let state = {
     { id: 3, name: 'NHÓM 3', score: 0, hasDouble: false },
     { id: 4, name: 'NHÓM 4', score: 0, hasDouble: false },
     { id: 5, name: 'NHÓM 5', score: 0, hasDouble: false },
-    { id: 6, name: 'NHÓM 6', score: 0, hasDouble: false }
+    { id: 7, name: 'NHÓM 7', score: 0, hasDouble: false }
   ],
   tiles: [], // Danh sách các ô chữ cái A -> R (hoặc A -> N)
   dareUsage: {}, // { dareId: count }
@@ -667,7 +667,7 @@ function renderScoreboard() {
     card.className = `team-card ${isActive ? 'active' : ''}`;
     card.innerHTML = `
       <div class="team-info">
-        <div class="team-rank-badge">${isLeader ? '👑' : idx + 1}</div>
+        <div class="team-rank-badge">${isLeader ? '👑' : team.id || idx + 1}</div>
         <div class="team-name-wrap">
           <div class="team-name">
             <span>${team.name}</span>
