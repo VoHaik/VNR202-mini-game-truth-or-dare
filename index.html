@@ -226,6 +226,7 @@
       <div class="modal-topbar dare-topbar">
         <div class="modal-badges">
           <span class="dare-fire-badge">🔥 THỬ THÁCH DARE</span>
+          <span class="dare-special-badge hidden" id="dare-special-reward-badge">✨ Ô ĐẶC BIỆT (+100Đ NẾU HOÀN THÀNH)</span>
         </div>
         <button class="btn-close-modal" id="btn-close-dare">✕</button>
       </div>
@@ -285,11 +286,11 @@
         </div>
 
         <div class="footer-right">
-          <button class="btn-host-action btn-dare-bonus" id="btn-dare-award-bonus">
-            👏 +50đ
+          <button class="btn-host-action btn-dare-fail" id="btn-dare-fail" title="Thất bại: Trừ 50 điểm và qua lượt">
+            ❌ Thất bại (-50đ)
           </button>
-          <button class="btn-host-action btn-dare-done" id="btn-dare-complete">
-            ✅ Hoàn thành
+          <button class="btn-host-action btn-dare-done" id="btn-dare-complete" title="Hoàn thành: Cộng điểm và qua lượt">
+            ✅ Hoàn thành (<span id="dare-success-pts-val">+50đ</span>)
           </button>
         </div>
       </div>

@@ -1107,7 +1107,7 @@ function renderSpecialTileContent(item, tileIndex) {
       saveState();
       closeQuestionModal();
       renderBoard();
-      openDareModal(true);
+      openDareModal(true, 100);
     });
     actionsEl.appendChild(btnGoDare);
   } else if (item.specialKind === 'friendship_integration') {
@@ -1306,12 +1306,29 @@ function populateDareDropdown() {
   });
 }
 
-function openDareModal(autoSpin = true) {
+let currentDareReward = 50;
+
+function openDareModal(autoSpin = true, rewardPoints = 50) {
+  currentDareReward = rewardPoints;
   const modal = document.getElementById('dare-modal');
   modal.classList.remove('hidden');
   renderModalTeamPills();
   populateDareDropdown();
   stopDareActionTimer();
+
+  const ptsValEl = document.getElementById('dare-success-pts-val');
+  if (ptsValEl) {
+    ptsValEl.textContent = `+${rewardPoints}đ`;
+  }
+
+  const specialBadge = document.getElementById('dare-special-reward-badge');
+  if (specialBadge) {
+    if (rewardPoints === 100) {
+      specialBadge.classList.remove('hidden');
+    } else {
+      specialBadge.classList.add('hidden');
+    }
+  }
 
   if (autoSpin) {
     spinRandomDare();
@@ -1795,23 +1812,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('btn-stop-dare-timer').addEventListener('click', stopDareActionTimer);
 
-  document.getElementById('btn-dare-award-bonus').addEventListener('click', () => {
-    const activeTeam = state.teams[state.activeTeamIndex];
-    activeTeam.score += 50;
-    sfx.playCorrect();
-    confetti.burst(75);
-    showToast(`👏 Thưởng nóng +50đ khích lệ cho ${activeTeam.name}!`);
-    advanceToNextTeam();
-    closeDareModal();
-  });
+  const btnDareFail = document.getElementById('btn-dare-fail');
+  if (btnDareFail) {
+    btnDareFail.addEventListener('click', () => {
+      const activeTeam = state.teams[state.activeTeamIndex];
+      activeTeam.score -= 50;
+      sfx.playWrong();
+      showToast(`❌ ${activeTeam.name} thực hiện Dare thất bại (-50đ)!`);
+      saveState();
+      renderScoreboard();
+      advanceToNextTeam();
+      closeDareModal();
+    });
+  }
 
-  document.getElementById('btn-dare-complete').addEventListener('click', () => {
-    sfx.playCorrect();
-    confetti.burst(55);
-    showToast(`✅ ${state.teams[state.activeTeamIndex].name} đã hoàn thành thử thách Dare!`);
-    advanceToNextTeam();
-    closeDareModal();
-  });
+  const btnDareComplete = document.getElementById('btn-dare-complete');
+  if (btnDareComplete) {
+    btnDareComplete.addEventListener('click', () => {
+      const activeTeam = state.teams[state.activeTeamIndex];
+      const pts = currentDareReward || 50;
+      activeTeam.score += pts;
+      sfx.playCorrect();
+      confetti.burst(65);
+      showToast(`✅ ${activeTeam.name} hoàn thành Dare (+${pts}đ)!`);
+      saveState();
+      renderScoreboard();
+      advanceToNextTeam();
+      closeDareModal();
+    });
+  }
 
   // Keyboard shortcuts
   document.addEventListener('keydown', (e) => {

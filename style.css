@@ -1792,21 +1792,43 @@ body {
   max-width: 245px;
 }
 
-.btn-dare-bonus {
-  background: rgba(157, 78, 221, 0.25);
-  border-color: var(--purple-neon);
-  color: #e0aaff;
+.btn-dare-fail {
+  background: rgba(255, 42, 95, 0.2);
+  border: 1px solid var(--dare-red);
+  color: #ff94ab;
 }
 
-.btn-dare-bonus:hover {
-  background: var(--purple-neon);
+.btn-dare-fail:hover {
+  background: var(--dare-red);
   color: #fff;
+  box-shadow: 0 4px 16px rgba(255, 42, 95, 0.45);
 }
 
 .btn-dare-done {
   background: var(--success-green);
   color: #001b0d;
   border: none;
+}
+
+.btn-dare-done:hover {
+  background: #26f089;
+  box-shadow: 0 4px 16px rgba(0, 230, 118, 0.45);
+}
+
+.dare-special-badge {
+  background: linear-gradient(135deg, rgba(255, 204, 0, 0.25), rgba(255, 123, 0, 0.25));
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 0.82rem;
+  padding: 4px 12px;
+  border-radius: 8px;
+  animation: pulseSpecialBadge 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes pulseSpecialBadge {
+  from { box-shadow: 0 0 6px rgba(255, 204, 0, 0.2); }
+  to { box-shadow: 0 0 16px rgba(255, 204, 0, 0.5); }
 }
 
 /* ==========================================================================
