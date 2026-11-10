@@ -632,11 +632,6 @@ function renderAll() {
 }
 
 function renderTopBar() {
-  const roundText = document.getElementById('round-text');
-  if (state.currentRound === 1) roundText.textContent = 'VÒNG 1 / 2';
-  else if (state.currentRound === 2) roundText.textContent = 'VÒNG 2 / 2';
-  else roundText.textContent = 'VÒNG PHỤ / VỀ ĐÍCH';
-
   const modeLabel = document.getElementById('grid-mode-label');
   modeLabel.textContent = state.includeSpecialTiles
     ? '18 Ô (14 Câu + 4 Ô Đặc Biệt)'
@@ -1582,28 +1577,6 @@ function showToast(msg) {
 document.addEventListener('DOMContentLoaded', () => {
   loadState();
   renderAll();
-
-  // Round controls
-  document.getElementById('btn-prev-round').addEventListener('click', () => {
-    sfx.playClick();
-    state.currentRound = state.currentRound > 1 ? state.currentRound - 1 : 3;
-    saveState();
-    renderTopBar();
-  });
-
-  document.getElementById('btn-next-round').addEventListener('click', () => {
-    sfx.playClick();
-    state.currentRound = state.currentRound < 3 ? state.currentRound + 1 : 1;
-    saveState();
-    renderTopBar();
-  });
-
-  document.getElementById('round-display').addEventListener('click', () => {
-    sfx.playClick();
-    state.currentRound = state.currentRound < 3 ? state.currentRound + 1 : 1;
-    saveState();
-    renderTopBar();
-  });
 
   // Next Turn button
   document.getElementById('btn-next-turn').addEventListener('click', () => {
