@@ -633,9 +633,7 @@ function renderAll() {
 
 function renderTopBar() {
   const modeLabel = document.getElementById('grid-mode-label');
-  modeLabel.textContent = state.includeSpecialTiles
-    ? '18 Ô (14 Câu + 4 Ô Đặc Biệt)'
-    : '14 Ô (Chỉ 14 Câu Hỏi)';
+  modeLabel.textContent = state.includeSpecialTiles ? '18 Ô' : '14 Ô';
 
   const specialPill = document.getElementById('special-pill-info');
   if (state.includeSpecialTiles) {
@@ -648,7 +646,6 @@ function renderTopBar() {
 function renderScoreboard() {
   const activeTeam = state.teams[state.activeTeamIndex] || state.teams[0];
   document.getElementById('active-team-banner-name').textContent = activeTeam.name;
-  document.getElementById('board-team-prompt').textContent = activeTeam.name;
 
   const multBadge = document.getElementById('active-multiplier-badge');
   if (activeTeam.hasDouble) {
@@ -674,10 +671,9 @@ function renderScoreboard() {
         <div class="team-name-wrap">
           <div class="team-name">
             <span>${team.name}</span>
-            ${team.hasDouble ? '<span title="Đang có nhân đôi điểm">⚡x2</span>' : ''}
+            ${team.hasDouble ? '<span class="team-x2-pill" title="Đang có nhân đôi điểm">⚡x2</span>' : ''}
             <button class="team-edit-btn" data-edit-team="${idx}" title="Đổi tên nhóm">✏️</button>
           </div>
-          <div class="team-sub">${isActive ? '🎯 Đang trong lượt' : 'Click để chọn lượt'}</div>
         </div>
       </div>
       <div class="team-score-controls">
@@ -760,10 +756,9 @@ function renderBoard() {
       tile.opened && isSpecial ? 'opened-special' : ''
     }`;
 
-    let subText = 'CHỌN Ô CHỮ';
-    if (tile.opened) {
-      subText = isSpecial ? '✨ Ô ĐẶC BIỆT (ĐÃ MỞ)' : '✔ ĐÃ MỞ';
-    }
+    const subHtml = tile.opened
+      ? `<div class="tile-sub">${isSpecial ? '✨ ĐẶC BIỆT' : '✔ ĐÃ MỞ'}</div>`
+      : '';
 
     const backIcon = isSpecial ? item.icon : item && item.themeIcon ? item.themeIcon : '📘';
 
@@ -771,9 +766,9 @@ function renderBoard() {
       <div class="tile-inner">
         <div class="tile-face tile-front">
           <span class="tile-corner-star">★</span>
+          ${tile.opened ? `<div class="tile-opened-icon">${backIcon}</div>` : ''}
           <div class="tile-letter">${tile.letter}</div>
-          <div class="tile-sub">${subText}</div>
-          <div class="tile-reopen-hint">Click để xem • Chuột phải để Reset ô</div>
+          ${subHtml}
         </div>
         <div class="tile-face tile-back">
           <div class="tile-back-icon">${backIcon}</div>
@@ -849,7 +844,7 @@ function openTileModal(tileIndex) {
 
   renderModalTeamPills();
 
-  document.getElementById('q-letter-badge').textContent = `Ô CHỮ ${tile.letter}`;
+  document.getElementById('q-letter-badge').textContent = `Ô ${tile.letter}`;
 
   const typeBadge = document.getElementById('q-type-badge');
   const pointsBadge = document.getElementById('q-points-badge');
@@ -868,6 +863,8 @@ function openTileModal(tileIndex) {
 
   feedbackBanner.classList.add('hidden');
   feedbackBanner.classList.remove('wrong-banner');
+  btnAwardPoints.classList.remove('pulse-cta');
+  themeBanner.classList.add('hidden');
 
   stopQuestionTimer();
   resetQuestionTimer(item.type === 'scramble' ? 20 : 15);
@@ -876,10 +873,9 @@ function openTileModal(tileIndex) {
     sfx.playSpecialTile();
     confetti.burst(75);
 
-    typeBadge.textContent = '✨ Ô ĐẶC BIỆT BẤT NGỜ!';
-    pointsBadge.textContent = `+${item.points} ĐIỂM`;
+    typeBadge.textContent = '✨ Ô ĐẶC BIỆT';
+    pointsBadge.textContent = `+${item.points}đ`;
     timerWidget.classList.add('hidden');
-    themeBanner.classList.add('hidden');
     qText.classList.add('hidden');
     optionsGrid.classList.add('hidden');
     scrambleContainer.classList.add('hidden');
@@ -892,13 +888,6 @@ function openTileModal(tileIndex) {
 
     renderSpecialTileContent(item, tileIndex);
   } else {
-    // Populate Thematic Banner Header
-    themeBanner.classList.remove('hidden');
-    document.getElementById('q-theme-icon').textContent = item.themeIcon || '🏛️';
-    document.getElementById('q-theme-tag').textContent = item.themeTag || 'CHUYÊN ĐỀ ĐẠI HỘI XI (2011)';
-    document.getElementById('q-theme-sub').textContent =
-      item.themeSub || 'Cương lĩnh bổ sung, phát triển năm 2011 & Đổi mới mô hình tăng trưởng';
-
     timerWidget.classList.remove('hidden');
     qText.classList.remove('hidden');
     qText.textContent = item.question;
@@ -910,16 +899,14 @@ function openTileModal(tileIndex) {
     btnAwardPoints.classList.remove('hidden');
 
     if (item.type === 'scramble') {
-      typeBadge.textContent = '🧩 GIẢI MÃ TỪ KHÓA (TRUTH)';
-      pointsBadge.textContent = `+${getEffectivePoints(item.points)} ĐIỂM`;
+      typeBadge.textContent = '🧩 GHÉP TỪ';
+      pointsBadge.textContent = `+${getEffectivePoints(item.points)}đ`;
       optionsGrid.classList.add('hidden');
       scrambleContainer.classList.remove('hidden');
       initScrambleUI(item);
     } else {
-      typeBadge.textContent = item.isBonusQuestion
-        ? '📘 CÂU HỎI PHỤ • ĐẠI HỘI XI'
-        : '📘 CÂU HỎI TRUTH • ĐẠI HỘI XI';
-      pointsBadge.textContent = `+${getEffectivePoints(item.points)} ĐIỂM`;
+      typeBadge.textContent = '📘 TRUTH';
+      pointsBadge.textContent = `+${getEffectivePoints(item.points)}đ`;
       optionsGrid.classList.remove('hidden');
       scrambleContainer.classList.add('hidden');
       renderMultipleChoiceOptions(item);
@@ -940,7 +927,7 @@ function updateAwardButtonLabel() {
   if (!item) return;
   const pts = getEffectivePoints(item.points || 100);
   document.getElementById('award-pts-val').textContent = `+${pts}`;
-  document.getElementById('q-points-badge').textContent = `+${pts} ĐIỂM`;
+  document.getElementById('q-points-badge').textContent = `+${pts}đ`;
 }
 
 function renderMultipleChoiceOptions(item) {
@@ -965,6 +952,7 @@ function renderMultipleChoiceOptions(item) {
 }
 
 function handleSelectOption(item, selectedKey, btnEl) {
+  if (btnEl.classList.contains('disabled')) return;
   stopQuestionTimer();
   const feedbackBanner = document.getElementById('q-feedback-banner');
   const feedbackIcon = document.getElementById('q-feedback-icon');
@@ -975,22 +963,23 @@ function handleSelectOption(item, selectedKey, btnEl) {
 
   if (selectedKey === item.correctKey) {
     btnEl.classList.add('correct');
+    document.querySelectorAll('#q-options-grid .option-btn').forEach((b) => b.classList.add('disabled'));
+    document.getElementById('btn-award-points').classList.add('pulse-cta');
     sfx.playCorrect();
     confetti.burst(105);
 
     feedbackBanner.classList.remove('wrong-banner');
     feedbackIcon.textContent = '🎉';
-    feedbackTitle.textContent = `CHÍNH XÁC! Xin chúc mừng ${state.teams[state.activeTeamIndex].name}!`;
-    feedbackAnswer.textContent = item.explanation || `Đáp án đúng là ${item.correctKey}.`;
+    feedbackTitle.textContent = `CHÍNH XÁC! (${state.teams[state.activeTeamIndex].name})`;
+    feedbackAnswer.textContent = item.explanation || '';
   } else {
-    btnEl.classList.add('wrong');
+    btnEl.classList.add('wrong', 'disabled');
     sfx.playWrong();
 
     feedbackBanner.classList.add('wrong-banner');
     feedbackIcon.textContent = '💥';
-    feedbackTitle.textContent = `CHƯA CHÍNH XÁC! (${state.teams[state.activeTeamIndex].name} chọn ${selectedKey})`;
-    feedbackAnswer.textContent =
-      'MC có thể bấm "🔥 Trả lời SAI ➔ Phạt DARE!" hoặc click chọn nhóm khác ở thanh trên để cướp cờ!';
+    feedbackTitle.textContent = `CHƯA ĐÚNG! (${state.teams[state.activeTeamIndex].name} chọn ${selectedKey})`;
+    feedbackAnswer.textContent = 'Bấm "🔥 Phạt DARE" hoặc chọn nhóm khác để cướp cờ.';
   }
 }
 
@@ -1122,9 +1111,31 @@ function renderSpecialTileContent(item, tileIndex) {
     });
     actionsEl.appendChild(btnGoDare);
   } else if (item.specialKind === 'friendship_integration') {
+    const partnerBox = document.createElement('div');
+    partnerBox.className = 'special-partner-box';
+    partnerBox.innerHTML = `<div class="special-partner-label">🎁 Chọn 1 nhóm bạn để tặng +50đ hữu nghị (và +100đ cho ${activeTeam.name}):</div>`;
+    const partnerGrid = document.createElement('div');
+    partnerGrid.className = 'special-partner-grid';
+
+    state.teams.forEach((t, tIdx) => {
+      if (tIdx === state.activeTeamIndex) return;
+      const pBtn = document.createElement('button');
+      pBtn.className = 'btn-host-action btn-reveal';
+      pBtn.textContent = `🤝 Tặng +50đ cho ${t.name}`;
+      pBtn.addEventListener('click', () => {
+        state.teams[tIdx].score += 50;
+        showToast(`🤝 ${t.name} nhận +50đ hữu nghị từ ${activeTeam.name}!`);
+        awardPointsAndCloseTile(100, true);
+      });
+      partnerGrid.appendChild(pBtn);
+    });
+
+    partnerBox.appendChild(partnerGrid);
+    actionsEl.appendChild(partnerBox);
+
     const btnSelf = document.createElement('button');
     btnSelf.className = 'btn-host-action btn-award-points';
-    btnSelf.textContent = `🤝 Cộng +100đ cho ${activeTeam.name} & Đánh dấu đã mở`;
+    btnSelf.textContent = `✅ Chỉ cộng +100đ cho ${activeTeam.name} & Qua lượt`;
     btnSelf.addEventListener('click', () => {
       awardPointsAndCloseTile(100, true);
     });
@@ -1140,6 +1151,7 @@ function revealCorrectAnswer() {
 
   stopQuestionTimer();
   sfx.playCorrect();
+  document.getElementById('btn-award-points').classList.add('pulse-cta');
 
   const feedbackBanner = document.getElementById('q-feedback-banner');
   const feedbackIcon = document.getElementById('q-feedback-icon');
@@ -1246,7 +1258,7 @@ function toggleQuestionTimer() {
       questionTimeMax = 15;
     }
     questionTimerRunning = true;
-    btn.textContent = '⏸ Tạm dừng';
+    btn.textContent = '⏸ Dừng';
     questionTimerInterval = setInterval(() => {
       questionTimeLeft--;
       updateTimerDisplay();
@@ -1255,7 +1267,7 @@ function toggleQuestionTimer() {
       } else {
         stopQuestionTimer();
         sfx.playWrong();
-        showToast('⏰ HẾT GIỜ SUY NGHĨ!');
+        showToast('⏰ HẾT GIỜ!');
       }
     }, 1000);
   }
@@ -1268,7 +1280,7 @@ function stopQuestionTimer() {
     questionTimerInterval = null;
   }
   const btn = document.getElementById('btn-timer-toggle');
-  if (btn) btn.textContent = '▶ Bắt đầu giờ';
+  if (btn) btn.textContent = '▶ Đếm giờ';
 }
 
 function resetQuestionTimer(sec = 15) {
@@ -1284,12 +1296,12 @@ function resetQuestionTimer(sec = 15) {
 function populateDareDropdown() {
   const select = document.getElementById('select-specific-dare');
   if (!select) return;
-  select.innerHTML = '<option value="">-- Hoặc MC chọn nhanh Dare cụ thể --</option>';
+  select.innerHTML = '<option value="">📋 Chọn nhanh...</option>';
   DARE_CHALLENGES.forEach((d) => {
     const count = state.dareUsage[d.id] || 0;
     const opt = document.createElement('option');
     opt.value = d.id;
-    opt.textContent = `Dare #${d.id} (${count}/2): ${d.text.slice(0, 48)}...`;
+    opt.textContent = `#${d.id} (${count}/2): ${d.text.slice(0, 42)}...`;
     select.appendChild(opt);
   });
 }
@@ -1365,6 +1377,18 @@ function displayChosenDare(dareObj, incrementCount = true) {
   document.getElementById('dare-repeat-tag').textContent = `Số lần xuất hiện: ${
     state.dareUsage[dareObj.id] || 1
   } / 2 lần`;
+
+  const recBadge = document.getElementById('dare-recommend-5s');
+  const btn5s = document.getElementById('btn-dare-5s');
+  if (recBadge && btn5s) {
+    if (dareObj.hasFiveSec) {
+      recBadge.classList.remove('hidden');
+      btn5s.classList.add('recommended');
+    } else {
+      recBadge.classList.add('hidden');
+      btn5s.classList.remove('recommended');
+    }
+  }
 
   populateDareDropdown();
 }
@@ -1635,7 +1659,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sound toggle
   document.getElementById('btn-sound-toggle').addEventListener('click', (e) => {
     sfx.enabled = !sfx.enabled;
-    e.currentTarget.textContent = sfx.enabled ? '🔊 Âm thanh: BẬT' : '🔇 Âm thanh: TẮT';
+    e.currentTarget.textContent = sfx.enabled ? '🔊' : '🔇';
     if (sfx.enabled) sfx.playClick();
   });
 
