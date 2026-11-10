@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="trophyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff4b8"/>
+      <stop offset="40%" stop-color="#ffd000"/>
+      <stop offset="100%" stop-color="#d47a00"/>
+    </linearGradient>
+    <linearGradient id="baseGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3a4468"/>
+      <stop offset="100%" stop-color="#171c33"/>
+    </linearGradient>
+  </defs>
+  <!-- Glow -->
+  <circle cx="64" cy="54" r="46" fill="#ffcc00" opacity="0.18"/>
+  <!-- Handles -->
+  <path d="M34,30 H18 C14,30 12,48 24,56 C29,59 35,60 38,60" fill="none" stroke="url(#trophyGrad)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M94,30 H110 C114,30 116,48 104,56 C99,59 93,60 90,60" fill="none" stroke="url(#trophyGrad)" stroke-width="6" stroke-linecap="round"/>
+  <!-- Cup Body -->
+  <path d="M32,20 H96 V46 C96,68 82,80 64,80 C46,80 32,68 32,46 Z" fill="url(#trophyGrad)"/>
+  <!-- Star on Cup -->
+  <polygon points="64,31 68,42 80,42 70,49 74,60 64,53 54,60 58,49 48,42 60,42" fill="#fff9db"/>
+  <!-- Stem -->
+  <rect x="57" y="78" width="14" height="18" rx="3" fill="url(#trophyGrad)"/>
+  <rect x="44" y="94" width="40" height="8" rx="4" fill="url(#trophyGrad)"/>
+  <!-- Pedestal -->
+  <rect x="34" y="102" width="60" height="16" rx="4" fill="url(#baseGrad)" stroke="url(#trophyGrad)" stroke-width="2"/>
+</svg>

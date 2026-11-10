@@ -1,8 +1,8 @@
 /**
  * ============================================================================
- * TRUTH OR DARE - VNR202 (CHUYÊN ĐỀ ĐẠI HỘI XI - 2011)
+ * TRUTH OR DARE - VNR202 (CHUYÊN ĐỀ ĐẠI HỘI XI - 2011) - DELUXE EDITION
  * 14 Câu Hỏi Truth chuẩn từ Outline_VNR202_N6.docx + 4 Ô Đặc Biệt + 12 Thử Thách Dare
- * Thiết kế linh hoạt tối đa cho MC điều phối lớp học
+ * Tích hợp 3D Card Flip, Vòng Đếm Giờ SVG, Thẻ Bài Dare Hoàng Gia & Bục Vinh Danh Top 3
  * ============================================================================
  */
 
@@ -14,6 +14,9 @@ const TRUTH_QUESTIONS = [
     id: 'q1',
     type: 'truth',
     points: 100,
+    themeIcon: '🌐',
+    themeTag: 'BỐI CẢNH LỊCH SỬ & HỘI NHẬP QUỐC TẾ',
+    themeSub: 'Dấu mốc Việt Nam hội nhập sâu rộng vào nền kinh tế thế giới trước thềm Đại hội XI',
     question: 'Việt Nam chính thức gia nhập Tổ chức Thương mại Thế giới (WTO) vào năm nào?',
     options: [
       { key: 'A', text: '2005' },
@@ -28,6 +31,9 @@ const TRUTH_QUESTIONS = [
     id: 'q2',
     type: 'truth',
     points: 100,
+    themeIcon: '📉',
+    themeTag: 'BỐI CẢNH KINH TẾ THẾ GIỚI & TRONG NƯỚC',
+    themeSub: 'Tác động từ biến động kinh tế toàn cầu giai đoạn 2008–2009 đối với Việt Nam',
     question: 'Cuộc khủng hoảng tài chính toàn cầu 2008–2009 đã tác động đến nền kinh tế Việt Nam như thế nào?',
     options: [
       { key: 'A', text: 'Làm giảm nhu cầu xuất khẩu và đầu tư' },
@@ -42,6 +48,9 @@ const TRUTH_QUESTIONS = [
     id: 'q3',
     type: 'truth',
     points: 100,
+    themeIcon: '🏛️',
+    themeTag: 'DẤU MỐC ĐẠI HỘI ĐẢNG TOÀN QUỐC',
+    themeSub: 'Sự kiện chính trị trọng đại định hướng phát triển đất nước giai đoạn 2011–2020',
     question: 'Đại hội XI diễn ra vào năm nào và là Đại hội đại biểu toàn quốc lần thứ mấy?',
     options: [
       { key: 'A', text: 'Năm 2006 – Đại hội X' },
@@ -56,6 +65,9 @@ const TRUTH_QUESTIONS = [
     id: 'q4',
     type: 'truth',
     points: 100,
+    themeIcon: '⚙️',
+    themeTag: 'NHẬN DIỆN MÔ HÌNH TĂNG TRƯỞNG KINH TẾ',
+    themeSub: 'Đặc điểm và giới hạn của mô hình tăng trưởng kinh tế theo chiều rộng',
     question: 'Mô hình tăng trưởng theo chiều rộng thường dựa nhiều vào những yếu tố nào?',
     options: [
       { key: 'A', text: 'Năng suất lao động và đổi mới công nghệ' },
@@ -70,6 +82,9 @@ const TRUTH_QUESTIONS = [
     id: 'q5',
     type: 'truth',
     points: 100,
+    themeIcon: '🌱',
+    themeTag: 'ĐỔI MỚI MÔ HÌNH TĂNG TRƯỞNG ĐẠI HỘI XI',
+    themeSub: 'Chuyển dịch từ chiều rộng sang kết hợp hợp lý giữa chiều rộng và chiều sâu',
     question: 'Đại hội XI đặt ra yêu cầu chuyển đổi mô hình tăng trưởng theo hướng nào?',
     options: [
       { key: 'A', text: 'Tăng trưởng nhanh bằng mọi giá' },
@@ -78,12 +93,15 @@ const TRUTH_QUESTIONS = [
       { key: 'D', text: 'Chỉ chú trọng phát triển công nghiệp' }
     ],
     correctKey: 'C',
-    explanation: 'Chuyển đổi mô hình tăng trưởng từ chiều rộng sang kết hợp hợp lý giữa chiều rộng và chiều sâu, nâng cao chất lượng, hiệu quả và tính bền vững.'
+    explanation: 'Chuyển đổi mô hình tăng trưởng từ chiều rộng sang chiều sâu, nâng cao chất lượng, hiệu quả, sức cạnh tranh và tính bền vững.'
   },
   {
     id: 'q6',
     type: 'truth',
     points: 100,
+    themeIcon: '🎓',
+    themeTag: 'ĐỘT PHÁ CHIẾN LƯỢC VỀ NGUỒN NHÂN LỰC',
+    themeSub: 'Vai trò quyết định của con người và tri thức trong công nghiệp hóa, hiện đại hóa',
     question: 'Vì sao phát triển nguồn nhân lực, đặc biệt là nguồn nhân lực chất lượng cao, được xem là một đột phá chiến lược?',
     options: [
       { key: 'A', text: 'Giúp giảm nhu cầu hội nhập' },
@@ -98,6 +116,9 @@ const TRUTH_QUESTIONS = [
     id: 'q7',
     type: 'truth',
     points: 100,
+    themeIcon: '📜',
+    themeTag: 'CƯƠNG LĨNH (BỔ SUNG, PHÁT TRIỂN NĂM 2011)',
+    themeSub: 'Tư duy lý luận của Đảng về thời kỳ quá độ lên chủ nghĩa xã hội ở Việt Nam',
     question: 'Cương lĩnh năm 2011 nêu và nhấn mạnh việc nhận thức, giải quyết bao nhiêu mối quan hệ lớn?',
     options: [
       { key: 'A', text: '6 mối quan hệ lớn' },
@@ -112,6 +133,9 @@ const TRUTH_QUESTIONS = [
     id: 'q8',
     type: 'truth',
     points: 100,
+    themeIcon: '⚠️',
+    themeTag: 'THÁCH THỨC KINH TẾ VĨ MÔ TRƯỚC ĐẠI HỘI XI',
+    themeSub: 'Nhận diện những điểm nghẽn và bất ổn vĩ mô cần tập trung tháo gỡ',
     question: 'Đâu KHÔNG phải là một trong ba bất ổn kinh tế nổi bật trước Đại hội XI: lạm phát, nợ xấu, bất động sản hay thiếu hụt lao động phổ thông?',
     options: [
       { key: 'A', text: 'Lạm phát tăng cao' },
@@ -126,6 +150,9 @@ const TRUTH_QUESTIONS = [
     id: 'q9',
     type: 'truth',
     points: 100,
+    themeIcon: '🏦',
+    themeTag: 'TÁI CƠ CẤU NỀN KINH TẾ TRỌNG TÂM',
+    themeSub: 'Ba trụ cột tái cơ cấu gắn liền với chuyển đổi mô hình tăng trưởng',
     question: 'Ba lĩnh vực trọng tâm được xác định trong quá trình tái cơ cấu nền kinh tế là gì?',
     options: [
       { key: 'A', text: 'Đầu tư công, hệ thống tổ chức tín dụng và doanh nghiệp nhà nước' },
@@ -140,6 +167,9 @@ const TRUTH_QUESTIONS = [
     id: 'q10',
     type: 'scramble',
     points: 100,
+    themeIcon: '🧩',
+    themeTag: 'THỬ THÁCH GIẢI MÃ TỪ KHÓA TRỌNG TÂM',
+    themeSub: 'Đột phá chiến lược đầu tiên về hoàn thiện thể chế kinh tế tại Đại hội XI',
     question: 'GIẢI MÃ TỪ KHÓA: Sắp xếp các cụm từ sau thành một khái niệm hoàn chỉnh: [ TẾ ] - [ THỊ ] - [ TRƯỜNG ] - [ KINH ] - [ XHCN ] - [ ĐỊNH HƯỚNG ]',
     scrambleWords: ['TẾ', 'THỊ', 'TRƯỜNG', 'KINH', 'XHCN', 'ĐỊNH HƯỚNG'],
     targetPhrase: 'KINH TẾ THỊ TRƯỜNG ĐỊNH HƯỚNG XHCN',
@@ -149,6 +179,9 @@ const TRUTH_QUESTIONS = [
     id: 'q11',
     type: 'truth',
     points: 100,
+    themeIcon: '🧭',
+    themeTag: 'VĂN KIỆN CHIẾN LƯỢC ĐẠI HỘI XI (2011)',
+    themeSub: 'Kim chỉ nam phát triển kinh tế - xã hội Việt Nam suốt thập niên 2011–2020',
     question: 'Đại hội XI thông qua văn kiện nào xác định định hướng phát triển đất nước trong giai đoạn 10 năm (2011–2020)?',
     options: [
       { key: 'A', text: 'Chiến lược phát triển kinh tế – xã hội 2011–2020' },
@@ -163,6 +196,9 @@ const TRUTH_QUESTIONS = [
     id: 'q12',
     type: 'truth',
     points: 100,
+    themeIcon: '🚀',
+    themeTag: 'BA ĐỘT PHÁ CHIẾN LƯỢC (2011–2020)',
+    themeSub: 'Đòn bẩy thúc đẩy Việt Nam cơ bản trở thành nước công nghiệp theo hướng hiện đại',
     question: 'Đâu là một trong ba đột phá chiến lược được Đại hội XI xác định?',
     options: [
       { key: 'A', text: 'Phát triển nguồn nhân lực, nhất là nguồn nhân lực chất lượng cao' },
@@ -178,6 +214,9 @@ const TRUTH_QUESTIONS = [
     type: 'truth',
     points: 100,
     isBonusQuestion: true,
+    themeIcon: '🛡️',
+    themeTag: 'CÂU HỎI PHỤ • ỔN ĐỊNH KINH TẾ VĨ MÔ',
+    themeSub: 'Kiềm chế lạm phát, bảo đảm an sinh xã hội và duy trì đà tăng trưởng hợp lý',
     question: '(Câu hỏi phụ 1) Mục tiêu quan trọng của việc ổn định kinh tế vĩ mô là gì?',
     options: [
       { key: 'A', text: 'Tạo nền tảng cho tăng trưởng ổn định và bền vững' },
@@ -193,6 +232,9 @@ const TRUTH_QUESTIONS = [
     type: 'truth',
     points: 100,
     isBonusQuestion: true,
+    themeIcon: '🌉',
+    themeTag: 'CÂU HỎI PHỤ • ĐỘT PHÁ KẾT CẤU HẠ TẦNG',
+    themeSub: 'Phát triển hệ thống giao thông trục chính và hạ tầng đô thị lớn hiện đại',
     question: '(Câu hỏi phụ 2) Đâu là một trong ba đột phá chiến lược của Đại hội XI?',
     options: [
       { key: 'A', text: 'Xây dựng hệ thống kết cấu hạ tầng đồng bộ' },
@@ -325,7 +367,7 @@ const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const STORAGE_KEY = 'VNR202_TRUTH_OR_DARE_STATE_V1';
 
 // ----------------------------------------------------------------------------
-// 2. BỘ TẠO ÂM THANH SÂN KHẤU (WEB AUDIO SYNTHESIZER - ZERO EXTERNAL MP3)
+// 2. BỘ TẠO ÂM THANH SÂN KHẤU (WEB AUDIO SYNTHESIZER)
 // ----------------------------------------------------------------------------
 class SoundFX {
   constructor() {
@@ -385,6 +427,18 @@ class SoundFX {
     notes.forEach((n, i) => this.tone(n, 'triangle', 0.25, i * 0.08, 0.24));
   }
 
+  playFanfare() {
+    const melody = [
+      { f: 523.25, d: 0.18, t: 0 },
+      { f: 659.25, d: 0.18, t: 0.14 },
+      { f: 783.99, d: 0.18, t: 0.28 },
+      { f: 1046.5, d: 0.35, t: 0.42 },
+      { f: 783.99, d: 0.18, t: 0.72 },
+      { f: 1046.5, d: 0.55, t: 0.88 }
+    ];
+    melody.forEach((m) => this.tone(m.f, 'triangle', m.d, m.t, 0.25));
+  }
+
   playWrong() {
     this.tone(180, 'sawtooth', 0.28, 0, 0.22);
     this.tone(135, 'sawtooth', 0.42, 0.18, 0.25);
@@ -426,12 +480,12 @@ class ConfettiManager {
   }
 
   burst(count = 110) {
-    const colors = ['#ffcc00', '#00d2ff', '#ff3366', '#00e676', '#9d4edd', '#ffffff'];
+    const colors = ['#ffcc00', '#00d2ff', '#ff2a5f', '#00e676', '#9d4edd', '#ffffff'];
     for (let i = 0; i < count; i++) {
       this.particles.push({
-        x: this.canvas.width * (0.25 + Math.random() * 0.5),
+        x: this.canvas.width * (0.2 + Math.random() * 0.6),
         y: this.canvas.height * 0.35,
-        vx: (Math.random() - 0.5) * 18,
+        vx: (Math.random() - 0.5) * 19,
         vy: -Math.random() * 16 - 5,
         size: 6 + Math.random() * 7,
         color: colors[Math.floor(Math.random() * colors.length)],
@@ -501,6 +555,7 @@ let state = {
 // Timer variables
 let questionTimerInterval = null;
 let questionTimeLeft = 15;
+let questionTimeMax = 15;
 let questionTimerRunning = false;
 
 let dareTimerInterval = null;
@@ -554,7 +609,6 @@ function loadState() {
   } catch (e) {
     console.warn('Could not load saved state', e);
   }
-  // Default fresh state
   state.tiles = buildInitialTiles(state.includeSpecialTiles, true);
   DARE_CHALLENGES.forEach((d) => (state.dareUsage[d.id] = 0));
   saveState();
@@ -578,11 +632,6 @@ function renderAll() {
 }
 
 function renderTopBar() {
-  const roundText = document.getElementById('round-text');
-  if (state.currentRound === 1) roundText.textContent = 'VÒNG 1 / 2';
-  else if (state.currentRound === 2) roundText.textContent = 'VÒNG 2 / 2';
-  else roundText.textContent = 'VÒNG PHỤ / VỀ ĐÍCH';
-
   const modeLabel = document.getElementById('grid-mode-label');
   modeLabel.textContent = state.includeSpecialTiles
     ? '18 Ô (14 Câu + 4 Ô Đặc Biệt)'
@@ -608,7 +657,6 @@ function renderScoreboard() {
     multBadge.classList.add('hidden');
   }
 
-  // Find highest score for crown indicator
   const maxScore = Math.max(...state.teams.map((t) => t.score));
 
   const listEl = document.getElementById('teams-list');
@@ -640,7 +688,6 @@ function renderScoreboard() {
       </div>
     `;
 
-    // Click card to select active team
     card.addEventListener('click', (e) => {
       if (e.target.closest('button')) return;
       sfx.playClick();
@@ -653,7 +700,6 @@ function renderScoreboard() {
     listEl.appendChild(card);
   });
 
-  // Attach score adjustment & rename listeners
   listEl.querySelectorAll('[data-adj-team]').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -690,6 +736,7 @@ function adjustTeamScore(teamIdx, delta, customMessage = null) {
   showToast(customMessage || `${state.teams[teamIdx].name}: ${sign} điểm!`);
 }
 
+// Render 3D Flip Letter Grid
 function renderBoard() {
   const grid = document.getElementById('letter-grid');
   grid.innerHTML = '';
@@ -718,15 +765,34 @@ function renderBoard() {
       subText = isSpecial ? '✨ Ô ĐẶC BIỆT (ĐÃ MỞ)' : '✔ ĐÃ MỞ';
     }
 
+    const backIcon = isSpecial ? item.icon : item && item.themeIcon ? item.themeIcon : '📘';
+
     tileEl.innerHTML = `
-      <div class="tile-letter">${tile.letter}</div>
-      <div class="tile-sub">${subText}</div>
-      <div class="tile-reopen-hint">Click để xem lại • Chuột phải để Reset ô</div>
+      <div class="tile-inner">
+        <div class="tile-face tile-front">
+          <span class="tile-corner-star">★</span>
+          <div class="tile-letter">${tile.letter}</div>
+          <div class="tile-sub">${subText}</div>
+          <div class="tile-reopen-hint">Click để xem • Chuột phải để Reset ô</div>
+        </div>
+        <div class="tile-face tile-back">
+          <div class="tile-back-icon">${backIcon}</div>
+        </div>
+      </div>
     `;
 
-    // Left click: open tile modal
+    // Left click: 3D Flip animation then open modal
     tileEl.addEventListener('click', () => {
-      openTileModal(idx);
+      if (!tile.opened) {
+        tileEl.classList.add('flipping');
+        sfx.playTileOpen();
+        setTimeout(() => {
+          tileEl.classList.remove('flipping');
+          openTileModal(idx);
+        }, 340);
+      } else {
+        openTileModal(idx);
+      }
     });
 
     // Right click: toggle opened/unopened state quickly for Host
@@ -783,12 +849,12 @@ function openTileModal(tileIndex) {
 
   renderModalTeamPills();
 
-  // Top badges
   document.getElementById('q-letter-badge').textContent = `Ô CHỮ ${tile.letter}`;
 
   const typeBadge = document.getElementById('q-type-badge');
   const pointsBadge = document.getElementById('q-points-badge');
   const timerWidget = document.getElementById('q-timer-widget');
+  const themeBanner = document.getElementById('q-theme-banner');
   const qText = document.getElementById('q-text');
   const optionsGrid = document.getElementById('q-options-grid');
   const scrambleContainer = document.getElementById('q-scramble-container');
@@ -803,18 +869,17 @@ function openTileModal(tileIndex) {
   feedbackBanner.classList.add('hidden');
   feedbackBanner.classList.remove('wrong-banner');
 
-  // Stop & reset timer default (15s)
   stopQuestionTimer();
   resetQuestionTimer(item.type === 'scramble' ? 20 : 15);
 
   if (item.type === 'special') {
-    // SPECIAL MYSTERY TILE
     sfx.playSpecialTile();
-    confetti.burst(70);
+    confetti.burst(75);
 
     typeBadge.textContent = '✨ Ô ĐẶC BIỆT BẤT NGỜ!';
     pointsBadge.textContent = `+${item.points} ĐIỂM`;
     timerWidget.classList.add('hidden');
+    themeBanner.classList.add('hidden');
     qText.classList.add('hidden');
     optionsGrid.classList.add('hidden');
     scrambleContainer.classList.add('hidden');
@@ -826,39 +891,17 @@ function openTileModal(tileIndex) {
     btnAwardPoints.classList.add('hidden');
 
     renderSpecialTileContent(item, tileIndex);
-  } else if (item.type === 'scramble') {
-    // QUESTION 10: WORD SCRAMBLE
-    sfx.playTileOpen();
-    typeBadge.textContent = '🧩 GIẢI MÃ TỪ KHÓA (TRUTH)';
-    pointsBadge.textContent = `+${getEffectivePoints(item.points)} ĐIỂM`;
-    timerWidget.classList.remove('hidden');
-    qText.classList.remove('hidden');
-    qText.textContent = item.question;
-
-    optionsGrid.classList.add('hidden');
-    specialContainer.classList.add('hidden');
-    scrambleContainer.classList.remove('hidden');
-
-    btnReveal.classList.remove('hidden');
-    btnResetTry.classList.remove('hidden');
-    btnTriggerDare.classList.remove('hidden');
-    btnAwardPoints.classList.remove('hidden');
-
-    initScrambleUI(item);
-    updateAwardButtonLabel();
   } else {
-    // STANDARD MULTIPLE CHOICE TRUTH QUESTION
-    sfx.playTileOpen();
-    typeBadge.textContent = item.isBonusQuestion
-      ? '📘 CÂU HỎI PHỤ • ĐẠI HỘI XI'
-      : '📘 CÂU HỎI TRUTH • ĐẠI HỘI XI';
-    pointsBadge.textContent = `+${getEffectivePoints(item.points)} ĐIỂM`;
+    // Populate Thematic Banner Header
+    themeBanner.classList.remove('hidden');
+    document.getElementById('q-theme-icon').textContent = item.themeIcon || '🏛️';
+    document.getElementById('q-theme-tag').textContent = item.themeTag || 'CHUYÊN ĐỀ ĐẠI HỘI XI (2011)';
+    document.getElementById('q-theme-sub').textContent =
+      item.themeSub || 'Cương lĩnh bổ sung, phát triển năm 2011 & Đổi mới mô hình tăng trưởng';
+
     timerWidget.classList.remove('hidden');
     qText.classList.remove('hidden');
     qText.textContent = item.question;
-
-    optionsGrid.classList.remove('hidden');
-    scrambleContainer.classList.add('hidden');
     specialContainer.classList.add('hidden');
 
     btnReveal.classList.remove('hidden');
@@ -866,7 +909,21 @@ function openTileModal(tileIndex) {
     btnTriggerDare.classList.remove('hidden');
     btnAwardPoints.classList.remove('hidden');
 
-    renderMultipleChoiceOptions(item);
+    if (item.type === 'scramble') {
+      typeBadge.textContent = '🧩 GIẢI MÃ TỪ KHÓA (TRUTH)';
+      pointsBadge.textContent = `+${getEffectivePoints(item.points)} ĐIỂM`;
+      optionsGrid.classList.add('hidden');
+      scrambleContainer.classList.remove('hidden');
+      initScrambleUI(item);
+    } else {
+      typeBadge.textContent = item.isBonusQuestion
+        ? '📘 CÂU HỎI PHỤ • ĐẠI HỘI XI'
+        : '📘 CÂU HỎI TRUTH • ĐẠI HỘI XI';
+      pointsBadge.textContent = `+${getEffectivePoints(item.points)} ĐIỂM`;
+      optionsGrid.classList.remove('hidden');
+      scrambleContainer.classList.add('hidden');
+      renderMultipleChoiceOptions(item);
+    }
     updateAwardButtonLabel();
   }
 }
@@ -886,7 +943,6 @@ function updateAwardButtonLabel() {
   document.getElementById('q-points-badge').textContent = `+${pts} ĐIỂM`;
 }
 
-// Render 4 Options A, B, C, D
 function renderMultipleChoiceOptions(item) {
   const grid = document.getElementById('q-options-grid');
   grid.innerHTML = '';
@@ -918,17 +974,15 @@ function handleSelectOption(item, selectedKey, btnEl) {
   feedbackBanner.classList.remove('hidden');
 
   if (selectedKey === item.correctKey) {
-    // CORRECT!
     btnEl.classList.add('correct');
     sfx.playCorrect();
-    confetti.burst(100);
+    confetti.burst(105);
 
     feedbackBanner.classList.remove('wrong-banner');
     feedbackIcon.textContent = '🎉';
     feedbackTitle.textContent = `CHÍNH XÁC! Xin chúc mừng ${state.teams[state.activeTeamIndex].name}!`;
     feedbackAnswer.textContent = item.explanation || `Đáp án đúng là ${item.correctKey}.`;
   } else {
-    // WRONG!
     btnEl.classList.add('wrong');
     sfx.playWrong();
 
@@ -936,7 +990,7 @@ function handleSelectOption(item, selectedKey, btnEl) {
     feedbackIcon.textContent = '💥';
     feedbackTitle.textContent = `CHƯA CHÍNH XÁC! (${state.teams[state.activeTeamIndex].name} chọn ${selectedKey})`;
     feedbackAnswer.textContent =
-      'MC có thể bấm "🔥 Trả lời SAI ➔ Phạt DARE!" hoặc chọn nhóm khác trên thanh để cướp quyền trả lời!';
+      'MC có thể bấm "🔥 Trả lời SAI ➔ Phạt DARE!" hoặc click chọn nhóm khác ở thanh trên để cướp cờ!';
   }
 }
 
@@ -1028,7 +1082,7 @@ function renderSpecialTileContent(item, tileIndex) {
   if (item.specialKind === 'lucky_star') {
     const btn = document.createElement('button');
     btn.className = 'btn-host-action btn-award-points';
-    btn.textContent = `🎉 Cộng ngay +100đ cho ${activeTeam.name} &Qua lượt`;
+    btn.textContent = `🎉 Cộng ngay +100đ cho ${activeTeam.name} & Qua lượt`;
     btn.addEventListener('click', () => {
       awardPointsAndCloseTile(100, true);
     });
@@ -1130,7 +1184,7 @@ function awardPointsAndCloseTile(customPoints = null, autoAdvanceTurn = true) {
 
   tile.opened = true;
   sfx.playCorrect();
-  confetti.burst(90);
+  confetti.burst(95);
 
   showToast(`🏆 ${activeTeam.name} nhận +${finalPts} điểm!`);
 
@@ -1160,16 +1214,25 @@ function advanceToNextTeam() {
 }
 
 // ----------------------------------------------------------------------------
-// 8. ĐỒNG HỒ ĐẾM NGƯỢC CÂU HỎI (QUESTION TIMER)
+// 8. ĐỒNG HỒ ĐẾM NGƯỢC CÂU HỎI (SVG CIRCULAR RING TIMER)
 // ----------------------------------------------------------------------------
 function updateTimerDisplay() {
   const secEl = document.getElementById('q-timer-seconds');
-  const circleEl = document.getElementById('q-timer-circle');
+  const circleWrap = document.getElementById('q-timer-circle');
+  const ringBar = document.getElementById('q-timer-ring-bar');
+
   secEl.textContent = questionTimeLeft;
+  const circumference = 125.6;
+  const ratio = Math.max(0, Math.min(1, questionTimeLeft / (questionTimeMax || 15)));
+  const offset = circumference * (1 - ratio);
+  if (ringBar) {
+    ringBar.style.strokeDashoffset = `${offset}`;
+  }
+
   if (questionTimeLeft <= 5) {
-    circleEl.classList.add('urgent');
+    circleWrap.classList.add('urgent');
   } else {
-    circleEl.classList.remove('urgent');
+    circleWrap.classList.remove('urgent');
   }
 }
 
@@ -1178,7 +1241,10 @@ function toggleQuestionTimer() {
   if (questionTimerRunning) {
     stopQuestionTimer();
   } else {
-    if (questionTimeLeft <= 0) questionTimeLeft = 15;
+    if (questionTimeLeft <= 0) {
+      questionTimeLeft = 15;
+      questionTimeMax = 15;
+    }
     questionTimerRunning = true;
     btn.textContent = '⏸ Tạm dừng';
     questionTimerInterval = setInterval(() => {
@@ -1208,11 +1274,12 @@ function stopQuestionTimer() {
 function resetQuestionTimer(sec = 15) {
   stopQuestionTimer();
   questionTimeLeft = sec;
+  questionTimeMax = sec;
   updateTimerDisplay();
 }
 
 // ----------------------------------------------------------------------------
-// 9. VÒNG QUAY / BỐC THẺ HÌNH PHẠT DARE (DARE GACHA MODAL)
+// 9. VÒNG QUAY / BỐC THẺ HÌNH PHẠT DARE (ROYAL TAROT GACHA MODAL)
 // ----------------------------------------------------------------------------
 function populateDareDropdown() {
   const select = document.getElementById('select-specific-dare');
@@ -1249,32 +1316,27 @@ function spinRandomDare() {
   const numBadge = document.getElementById('dare-number-badge');
   const iconEl = document.getElementById('dare-card-icon');
   const textEl = document.getElementById('dare-card-text');
-  const repeatTag = document.getElementById('dare-repeat-tag');
 
-  // Filter dares that have been used < 2 times ("Random 1 thử thách 2 lần")
   let availableDares = DARE_CHALLENGES.filter((d) => (state.dareUsage[d.id] || 0) < 2);
   if (availableDares.length === 0) {
-    // Reset usage if all 12 dares have already been used twice
     DARE_CHALLENGES.forEach((d) => (state.dareUsage[d.id] = 0));
     availableDares = [...DARE_CHALLENGES];
     showToast('♻️ Cả 12 thử thách Dare đã xuất hiện đủ 2 lần — Đã làm mới kho Dare!');
   }
 
-  // Avoid picking the exact same dare just shown if possible
   if (availableDares.length > 1 && state.currentDareId) {
     availableDares = availableDares.filter((d) => d.id !== state.currentDareId);
   }
 
   const chosen = availableDares[Math.floor(Math.random() * availableDares.length)];
 
-  // Roulette visual animation
   slotEl.classList.add('spinning');
   let ticks = 0;
   const maxTicks = 14;
 
   const spinInterval = setInterval(() => {
     const temp = DARE_CHALLENGES[ticks % DARE_CHALLENGES.length];
-    numBadge.textContent = `ĐANG QUAY... #${temp.id}`;
+    numBadge.textContent = `ĐANG RÚT THẺ... #${temp.id}`;
     iconEl.textContent = temp.icon;
     textEl.textContent = temp.text;
     sfx.playSpinTick();
@@ -1307,13 +1369,19 @@ function displayChosenDare(dareObj, incrementCount = true) {
   populateDareDropdown();
 }
 
-// 5-Second / 10-Second Action Timer inside Dare Modal
+// 5-Second / 10-Second Action Timer with Smooth Progress Bar
 function startDareActionTimer(seconds) {
   stopDareActionTimer();
   const display = document.getElementById('dare-countdown-big');
-  display.classList.remove('hidden');
+  const track = document.getElementById('dare-progress-track');
+  const fill = document.getElementById('dare-progress-fill');
 
-  let remainingMs = seconds * 1000;
+  display.classList.remove('hidden');
+  track.classList.remove('hidden');
+  fill.style.width = '100%';
+
+  const totalMs = seconds * 1000;
+  let remainingMs = totalMs;
   display.textContent = `${(remainingMs / 1000).toFixed(1)}s`;
   sfx.playClick();
 
@@ -1321,6 +1389,7 @@ function startDareActionTimer(seconds) {
     remainingMs -= 100;
     if (remainingMs > 0) {
       display.textContent = `${(remainingMs / 1000).toFixed(1)}s`;
+      fill.style.width = `${(remainingMs / totalMs) * 100}%`;
       if (remainingMs % 1000 === 0) {
         sfx.playTick(remainingMs <= 3000);
       }
@@ -1329,7 +1398,7 @@ function startDareActionTimer(seconds) {
       display.classList.remove('hidden');
       display.textContent = '🎉 HẾT GIỜ!';
       sfx.playCorrect();
-      confetti.burst(60);
+      confetti.burst(65);
     }
   }, 100);
 }
@@ -1340,11 +1409,70 @@ function stopDareActionTimer() {
     dareTimerInterval = null;
   }
   const display = document.getElementById('dare-countdown-big');
+  const track = document.getElementById('dare-progress-track');
   if (display) display.classList.add('hidden');
+  if (track) track.classList.add('hidden');
 }
 
 // ----------------------------------------------------------------------------
-// 10. BẢNG QUẢN LÝ CỦA HOST (HOST MANAGER MODAL)
+// 10. BỤC VINH QUANG TOP 3 CHUNG CUỘC (VICTORY PODIUM MODAL)
+// ----------------------------------------------------------------------------
+function openPodiumModal() {
+  const modal = document.getElementById('podium-modal');
+  modal.classList.remove('hidden');
+
+  sfx.playFanfare();
+  confetti.burst(150);
+
+  // Sort teams by score descending
+  const sorted = [...state.teams].sort((a, b) => b.score - a.score);
+  const first = sorted[0];
+  const second = sorted[1];
+  const third = sorted[2];
+  const runners = sorted.slice(3);
+
+  const stageEl = document.getElementById('podium-stage');
+  stageEl.innerHTML = `
+    <!-- 2ND PLACE -->
+    <div class="podium-column">
+      <div class="podium-team-Avatar">🥈</div>
+      <div class="podium-team-name">${second.name}</div>
+      <div class="podium-team-score">${second.score} ĐIỂM</div>
+      <div class="podium-pillar pillar-2">2</div>
+    </div>
+
+    <!-- 1ST PLACE -->
+    <div class="podium-column">
+      <div class="podium-team-Avatar">👑🥇</div>
+      <div class="podium-team-name">${first.name}</div>
+      <div class="podium-team-score">${first.score} ĐIỂM</div>
+      <div class="podium-pillar pillar-1">1</div>
+    </div>
+
+    <!-- 3RD PLACE -->
+    <div class="podium-column">
+      <div class="podium-team-Avatar">🥉</div>
+      <div class="podium-team-name">${third.name}</div>
+      <div class="podium-team-score">${third.score} ĐIỂM</div>
+      <div class="podium-pillar pillar-3">3</div>
+    </div>
+  `;
+
+  const runnersEl = document.getElementById('podium-runners');
+  runnersEl.innerHTML = '';
+  runners.forEach((team, idx) => {
+    const card = document.createElement('div');
+    card.className = 'runner-card';
+    card.innerHTML = `
+      <span>Hạng ${idx + 4}: <strong>${team.name}</strong></span>
+      <span class="runner-score">${team.score} điểm</span>
+    `;
+    runnersEl.appendChild(card);
+  });
+}
+
+// ----------------------------------------------------------------------------
+// 11. BẢNG QUẢN LÝ CỦA HOST (HOST MANAGER MODAL)
 // ----------------------------------------------------------------------------
 function openManagerModal() {
   const modal = document.getElementById('manager-modal');
@@ -1372,7 +1500,9 @@ function openManagerModal() {
       </div>
       <div class="manager-item-actions">
         <button class="btn-mini" data-mgr-open-tile="${idx}">Mở lên</button>
-        <button class="btn-mini" data-mgr-toggle-tile="${idx}">${tile.opened ? 'Đặt lại Chưa mở' : 'Đánh dấu Đã mở'}</button>
+        <button class="btn-mini" data-mgr-toggle-tile="${idx}">${
+      tile.opened ? 'Đặt lại Chưa mở' : 'Đánh dấu Đã mở'
+    }</button>
       </div>
     `;
     qList.appendChild(row);
@@ -1425,7 +1555,7 @@ function openManagerModal() {
 }
 
 // ----------------------------------------------------------------------------
-// 11. TIỆN ÍCH THÔNG BÁO NHANH (TOAST)
+// 12. TIỆN ÍCH THÔNG BÁO NHANH (TOAST)
 // ----------------------------------------------------------------------------
 function showToast(msg) {
   const container = document.getElementById('toast-container');
@@ -1442,33 +1572,11 @@ function showToast(msg) {
 }
 
 // ----------------------------------------------------------------------------
-// 12. KẾT NỐI SỰ KIỆN NÚT BẤM & PHÍM TẮT (EVENT LISTENERS)
+// 13. KẾT NỐI SỰ KIỆN NÚT BẤM & PHÍM TẮT (EVENT LISTENERS)
 // ----------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
   loadState();
   renderAll();
-
-  // Round controls
-  document.getElementById('btn-prev-round').addEventListener('click', () => {
-    sfx.playClick();
-    state.currentRound = state.currentRound > 1 ? state.currentRound - 1 : 3;
-    saveState();
-    renderTopBar();
-  });
-
-  document.getElementById('btn-next-round').addEventListener('click', () => {
-    sfx.playClick();
-    state.currentRound = state.currentRound < 3 ? state.currentRound + 1 : 1;
-    saveState();
-    renderTopBar();
-  });
-
-  document.getElementById('round-display').addEventListener('click', () => {
-    sfx.playClick();
-    state.currentRound = state.currentRound < 3 ? state.currentRound + 1 : 1;
-    saveState();
-    renderTopBar();
-  });
 
   // Next Turn button
   document.getElementById('btn-next-turn').addEventListener('click', () => {
@@ -1481,6 +1589,24 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-open-dare-direct').addEventListener('click', () => {
     sfx.playClick();
     openDareModal(true);
+  });
+
+  // Open Top 3 Podium directly from top toolbar
+  document.getElementById('btn-open-podium').addEventListener('click', () => {
+    openPodiumModal();
+  });
+
+  document.getElementById('btn-close-podium').addEventListener('click', () => {
+    document.getElementById('podium-modal').classList.add('hidden');
+  });
+
+  document.getElementById('btn-podium-close-btn').addEventListener('click', () => {
+    document.getElementById('podium-modal').classList.add('hidden');
+  });
+
+  document.getElementById('btn-podium-fireworks').addEventListener('click', () => {
+    sfx.playFanfare();
+    confetti.burst(150);
   });
 
   // Toggle between 18 tiles (with 4 Special tiles) and 14 tiles (only 14 Truth questions)
@@ -1497,7 +1623,7 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   });
 
-  // Shuffle unopened tiles
+  // Shuffle tiles
   document.getElementById('btn-shuffle-board').addEventListener('click', () => {
     sfx.playTileOpen();
     state.tiles = buildInitialTiles(state.includeSpecialTiles, true);
@@ -1569,6 +1695,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-timer-reset').addEventListener('click', () => resetQuestionTimer(15));
   document.getElementById('btn-timer-add').addEventListener('click', () => {
     questionTimeLeft += 10;
+    questionTimeMax = Math.max(questionTimeMax, questionTimeLeft);
     updateTimerDisplay();
   });
 
@@ -1585,7 +1712,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('btn-reveal-answer').addEventListener('click', revealCorrectAnswer);
 
-  // Reset options for another team to steal
   document.getElementById('btn-reset-question-try').addEventListener('click', () => {
     const tile = state.tiles[state.currentOpenTileIndex];
     if (!tile) return;
@@ -1602,7 +1728,6 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast('🔄 Đã làm mới đáp án! Hãy click chọn Nhóm cướp cờ ở thanh phía trên!');
   });
 
-  // Wrong answer -> Trigger Dare!
   document.getElementById('btn-trigger-dare-from-q').addEventListener('click', () => {
     const tile = state.tiles[state.currentOpenTileIndex];
     if (tile) tile.opened = true;
@@ -1612,12 +1737,10 @@ document.addEventListener('DOMContentLoaded', () => {
     openDareModal(true);
   });
 
-  // Award points & mark tile opened
   document.getElementById('btn-award-points').addEventListener('click', () => {
     awardPointsAndCloseTile(null, true);
   });
 
-  // Just close & mark tile opened without awarding points
   document.getElementById('btn-close-mark-done').addEventListener('click', () => {
     const tile = state.tiles[state.currentOpenTileIndex];
     if (tile) tile.opened = true;
@@ -1666,7 +1789,7 @@ document.addEventListener('DOMContentLoaded', () => {
     closeDareModal();
   });
 
-  // Keyboard shortcuts for Host convenience
+  // Keyboard shortcuts
   document.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
@@ -1685,6 +1808,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (e.code === 'Escape') {
       closeQuestionModal();
       closeDareModal();
+      document.getElementById('podium-modal').classList.add('hidden');
       document.getElementById('manager-modal').classList.add('hidden');
     }
   });
