@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="cardGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd700" stop-opacity="0.32"/>
+      <stop offset="50%" stop-color="#ffaa00" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#00d2ff" stop-opacity="0.28"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#cardGold)" stroke-width="1.2">
+    <!-- Outer Filigree Frame -->
+    <rect x="10" y="10" width="180" height="180" rx="18"/>
+    <rect x="16" y="16" width="168" height="168" rx="14" stroke-dasharray="4 3"/>
+    <!-- Corner Ornaments -->
+    <path d="M10,36 L36,10 M164,10 L190,36 M10,164 L36,190 M164,190 L190,164"/>
+    <!-- Center Emblem Rings -->
+    <circle cx="100" cy="100" r="68"/>
+    <circle cx="100" cy="100" r="56" stroke-dasharray="5 5"/>
+    <polygon points="100,26 174,100 100,174 26,100"/>
+  </g>
+</svg>

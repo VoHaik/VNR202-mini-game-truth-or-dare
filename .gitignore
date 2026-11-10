@@ -1,0 +1,6 @@
+# Reference materials
+*.pdf
+*.docx
+~$*.docx
+.DS_Store
+Thumbs.db
