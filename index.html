@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TRUTH OR DARE - Đại Hội XI (2011) | VNR202</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Background animated particles / stage lights -->
+  <div class="bg-stage">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- TOP HOST / STAGE HEADER -->
+  <header class="top-bar">
+    <div class="brand-area">
+      <div class="badge-course">VNR202 • NHÓM 6</div>
+      <h1 class="game-title">
+        <span class="title-truth">TRUTH</span>
+        <span class="title-or">OR</span>
+        <span class="title-dare">DARE</span>
+      </h1>
+      <span class="subtitle">Chuyên đề: Đại hội XI của Đảng (2011) &amp; Đổi mới mô hình tăng trưởng</span>
+    </div>
+
+    <!-- Round & Active Turn Controller -->
+    <div class="round-controller">
+      <button class="btn-round" id="btn-prev-round" title="Chuyển vòng trước">◀</button>
+      <div class="round-display" id="round-display" title="Click để đổi vòng tự do">
+        <span class="round-label">VÒNG ĐẤU</span>
+        <span class="round-value" id="round-text">VÒNG 1 / 2</span>
+      </div>
+      <button class="btn-round" id="btn-next-round" title="Chuyển vòng tiếp theo">▶</button>
+    </div>
+
+    <!-- Quick Host Action Toolbar -->
+    <div class="host-toolbar">
+      <button class="btn-tool btn-dare-now" id="btn-open-dare-direct" title="Mở vòng bốc Thử Thách Dare bất kỳ lúc nào">
+        🔥 Bốc DARE Ngay
+      </button>
+      <button class="btn-tool" id="btn-toggle-grid-mode" title="Chuyển đổi giữa 18 ô (14 Câu + 4 Ô Đặc Biệt) và 14 ô (Chỉ 14 Câu hỏi)">
+        🎲 Chế độ: <span id="grid-mode-label">18 Ô (Có Ô Đặc Biệt)</span>
+      </button>
+      <button class="btn-tool" id="btn-shuffle-board" title="Xáo trộn lại vị trí các câu hỏi và ô đặc biệt (chỉ xáo các ô chưa mở hoặc reset)">
+        🔀 Trộn Ô
+      </button>
+      <button class="btn-tool" id="btn-sound-toggle" title="Bật / Tắt âm thanh sân khấu">
+        🔊 Âm thanh: BẬT
+      </button>
+      <button class="btn-tool" id="btn-manage-data" title="Xem danh sách câu hỏi, Dare hoặc Reset game">
+        ⚙️ Quản lý / Reset
+      </button>
+      <button class="btn-tool btn-icon-only" id="btn-fullscreen" title="Toàn màn hình máy chiếu">
+        ⛶
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN STAGE LAYOUT -->
+  <main class="stage-container">
+    <!-- LEFT SIDEBAR: 6 TEAMS SCOREBOARD & TURN SELECTOR -->
+    <aside class="scoreboard-panel">
+      <div class="panel-header">
+        <div>
+          <h2>🏆 BẢNG ĐIỂM 6 NHÓM</h2>
+          <p class="panel-hint">Click vào nhóm để chọn lượt • Cộng/trừ điểm tự do</p>
+        </div>
+        <button class="btn-next-turn" id="btn-next-turn" title="Chuyển sang nhóm tiếp theo theo thứ tự 1 -> 6">
+          Lượt kế ⏭
+        </button>
+      </div>
+
+      <!-- Active Team Status Banner -->
+      <div class="active-turn-banner" id="active-turn-banner">
+        <div class="turn-indicator">
+          <span class="pulse-dot"></span>
+          <span>ĐANG ĐẾN LƯỢT:</span>
+        </div>
+        <div class="active-team-name" id="active-team-banner-name">NHÓM 1</div>
+        <div class="multiplier-badge hidden" id="active-multiplier-badge">⚡ Đang có Nhân Đôi Điểm (x2)!</div>
+      </div>
+
+      <!-- 6 Teams List -->
+      <div class="teams-list" id="teams-list">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Legend / Mini Guide for Host -->
+      <div class="host-legend">
+        <div class="legend-title">💡 Điều phối nhanh cho MC:</div>
+        <ul>
+          <li><strong>Click chọn Nhóm</strong> bất kỳ để đổi người trả lời hoặc trao quyền cướp câu hỏi.</li>
+          <li><strong>Chuột phải vào Ô chữ cái</strong> để mở lại/đóng lại ô đó nếu bấm nhầm.</li>
+          <li><strong>Phím tắt:</strong> <code>Space</code> Bật/Dừng giờ • <code>D</code> Bốc Dare • <code>N</code> Qua lượt.</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- RIGHT / CENTER AREA: LETTER BOARD -->
+    <section class="board-section">
+      <div class="board-header">
+        <div class="board-status">
+          <span class="status-pill"><strong id="remaining-count">18</strong> / <span id="total-count">18</span> ô chưa mở</span>
+          <span class="status-pill pill-truth">📘 14 Câu hỏi Truth</span>
+          <span class="status-pill pill-special" id="special-pill-info">✨ 4 Ô Đặc Biệt ẩn giấu</span>
+        </div>
+        <div class="board-instruction">
+          👉 Mời <strong id="board-team-prompt" class="highlight-team">NHÓM 1</strong> chọn một chữ cái may mắn!
+        </div>
+      </div>
+
+      <!-- The Letter Grid -->
+      <div class="letter-grid" id="letter-grid">
+        <!-- Rendered by JS (Letters A -> R or A -> N) -->
+      </div>
+    </section>
+  </main>
+
+  <!-- ================================================================= -->
+  <!-- MODAL 1: TRUTH QUESTION & SPECIAL TILE MODAL                      -->
+  <!-- ================================================================= -->
+  <div class="modal-backdrop hidden" id="question-modal">
+    <div class="modal-card question-modal-card" id="question-modal-card">
+      <!-- Top Bar of Modal -->
+      <div class="modal-topbar">
+        <div class="modal-badges">
+          <span class="letter-badge" id="q-letter-badge">Ô CHỮ A</span>
+          <span class="type-badge" id="q-type-badge">TRUTH • CÂU HỎI LỊCH SỬ</span>
+          <span class="points-badge" id="q-points-badge">+100 ĐIỂM</span>
+        </div>
+
+        <!-- Question Timer -->
+        <div class="timer-widget" id="q-timer-widget">
+          <button class="btn-timer-ctrl" id="btn-timer-toggle" title="Bắt đầu / Tạm dừng đếm ngược (Space)">▶ Bắt đầu giờ</button>
+          <div class="timer-circle" id="q-timer-circle">
+            <span id="q-timer-seconds">15</span>s
+          </div>
+          <button class="btn-timer-ctrl" id="btn-timer-reset" title="Reset đồng hồ về 15s">↺</button>
+          <button class="btn-timer-ctrl" id="btn-timer-add" title="Thêm 10 giây">+10s</button>
+        </div>
+
+        <button class="btn-close-modal" id="btn-close-question" title="Đóng cửa sổ (Giữ trạng thái ô)">✕</button>
+      </div>
+
+      <!-- Team Currently Answering Selector inside Modal (for easy Steal / Switch) -->
+      <div class="modal-team-switcher">
+        <span class="switcher-label">🎯 Nhóm đang trả lời / nhận thưởng:</span>
+        <div class="switcher-pills" id="modal-team-pills">
+          <!-- 6 quick team pills so Host can switch immediately if another team steals! -->
+        </div>
+      </div>
+
+      <!-- Question Body -->
+      <div class="question-body">
+        <div class="question-text" id="q-text">
+          Nội dung câu hỏi sẽ hiển thị tại đây...
+        </div>
+
+        <!-- Standard 4 Multiple Choice Options (A, B, C, D) -->
+        <div class="options-grid" id="q-options-grid">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- Word Scramble Interactive Area (For Question 10) -->
+        <div class="scramble-container hidden" id="q-scramble-container">
+          <div class="scramble-hint">🧩 Sắp xếp các mảnh từ khóa dưới đây thành cụm từ chính xác (Click vào từ để ghép hoặc bấm "Hiện Đáp Án"):</div>
+          <div class="scramble-pool" id="scramble-pool"></div>
+          <div class="scramble-answer-box" id="scramble-answer-box">
+            <span class="placeholder-text">Click vào các từ phía trên để xếp vào đây...</span>
+          </div>
+          <div class="scramble-controls">
+            <button class="btn-secondary" id="btn-scramble-clear">↺ Xếp lại</button>
+            <button class="btn-primary" id="btn-scramble-check">✔ Kiểm tra đáp án</button>
+          </div>
+        </div>
+
+        <!-- Special Tile Display Area (When opening one of the 4 Mystery Tiles) -->
+        <div class="special-tile-container hidden" id="q-special-container">
+          <div class="special-icon" id="special-icon">🎁</div>
+          <h3 class="special-title" id="special-title">Ô ĐẶC BIỆT!</h3>
+          <p class="special-desc" id="special-desc">Mô tả hiệu ứng ô đặc biệt...</p>
+          <div class="special-actions" id="special-actions"></div>
+        </div>
+
+        <!-- Answer Explanation / Feedback Banner -->
+        <div class="feedback-banner hidden" id="q-feedback-banner">
+          <div class="feedback-icon" id="q-feedback-icon">🎉</div>
+          <div class="feedback-content">
+            <div class="feedback-title" id="q-feedback-title">CHÍNH XÁC!</div>
+            <div class="feedback-answer" id="q-feedback-answer">Đáp án đúng: ...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer: Flexible Host Controls -->
+      <div class="modal-footer">
+        <div class="footer-left">
+          <button class="btn-host-action btn-reveal" id="btn-reveal-answer">
+            👁️ Hiện đáp án đúng
+          </button>
+          <button class="btn-host-action btn-reset-options" id="btn-reset-question-try" title="Cho phép chọn lại đáp án (khi nhóm khác cướp quyền trả lời)">
+            🔄 Cho chọn lại (Cướp cờ)
+          </button>
+        </div>
+
+        <div class="footer-right">
+          <button class="btn-host-action btn-wrong-dare" id="btn-trigger-dare-from-q">
+            🔥 Trả lời SAI ➔ Phạt DARE!
+          </button>
+          <button class="btn-host-action btn-award-points" id="btn-award-points">
+            ✅ Cộng <span id="award-pts-val">+100</span>đ &amp; Hoàn thành ô
+          </button>
+          <button class="btn-host-action btn-complete-no-pts" id="btn-close-mark-done">
+            Đóng &amp; Đánh dấu đã mở
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- MODAL 2: DARE GACHA / CHALLENGE WHEEL MODAL                       -->
+  <!-- ================================================================= -->
+  <div class="modal-backdrop hidden" id="dare-modal">
+    <div class="modal-card dare-modal-card">
+      <div class="modal-topbar dare-topbar">
+        <div class="modal-badges">
+          <span class="dare-fire-badge">🔥 HÌNH PHẠT &amp; THỬ THÁCH DARE</span>
+          <span class="dare-usage-badge" id="dare-pool-status">Kho Dare: 12 thử thách (Tối đa 2 lần/thử thách)</span>
+        </div>
+        <button class="btn-close-modal" id="btn-close-dare">✕</button>
+      </div>
+
+      <!-- Target Team Selector in Dare Modal -->
+      <div class="modal-team-switcher dare-team-switcher">
+        <span class="switcher-label">😈 Nhóm đang thực hiện DARE:</span>
+        <div class="switcher-pills" id="dare-team-pills"></div>
+      </div>
+
+      <!-- Dare Card Slot / Roulette Display -->
+      <div class="dare-stage">
+        <div class="dare-card-slot" id="dare-card-slot">
+          <div class="dare-card-number" id="dare-number-badge">THỬ THÁCH #?</div>
+          <div class="dare-card-icon" id="dare-card-icon">🎭</div>
+          <div class="dare-card-text" id="dare-card-text">
+            Nhấn nút <strong>"🎰 QUAY THỬ THÁCH DARE"</strong> bên dưới để bốc ngẫu nhiên hình phạt cho nhóm!
+          </div>
+          <div class="dare-repeat-tag" id="dare-repeat-tag">Lần xuất hiện: 0 / 2</div>
+        </div>
+
+        <!-- 5-Second Action Timer for Dares ("trong 5 giây") -->
+        <div class="dare-action-timer">
+          <div class="dare-timer-label">⏱️ Đồng hồ bấm giờ thực hiện thử thách:</div>
+          <div class="dare-timer-controls">
+            <button class="btn-dare-timer" data-sec="5">⚡ Đếm ngược 5 Giây</button>
+            <button class="btn-dare-timer" data-sec="10">⏱️ 10 Giây</button>
+            <button class="btn-dare-timer" data-sec="15">⏱️ 15 Giây</button>
+            <button class="btn-dare-timer btn-stop-dare-timer" id="btn-stop-dare-timer">⏹ Dừng</button>
+          </div>
+          <div class="dare-countdown-big hidden" id="dare-countdown-big">5.0s</div>
+        </div>
+      </div>
+
+      <!-- Dare Modal Footer Controls -->
+      <div class="modal-footer dare-footer">
+        <div class="footer-left">
+          <button class="btn-dare-spin" id="btn-spin-dare">
+            🎰 QUAY / ĐỔI DARE KHÁC
+          </button>
+          <select id="select-specific-dare" class="dare-select-dropdown" title="Hoặc MC chủ động chọn 1 Dare cụ thể">
+            <option value="">-- Hoặc MC chọn nhanh Dare cụ thể --</option>
+          </select>
+        </div>
+
+        <div class="footer-right">
+          <button class="btn-host-action btn-dare-bonus" id="btn-dare-award-bonus" title="Thưởng điểm khích lệ nếu nhóm làm Dare cực kỳ sáng tạo / vui nhộn">
+            👏 Làm quá đỉnh! (+50đ khích lệ)
+          </button>
+          <button class="btn-host-action btn-dare-done" id="btn-dare-complete">
+            ✅ Đã hoàn thành Dare (Qua lượt)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- MODAL 3: HOST MANAGER / OVERVIEW / RESET                          -->
+  <!-- ================================================================= -->
+  <div class="modal-backdrop hidden" id="manager-modal">
+    <div class="modal-card manager-modal-card">
+      <div class="modal-topbar">
+        <h2>⚙️ BẢNG ĐIỀU KHIỂN MC &amp; DANH SÁCH CÂU HỎI</h2>
+        <button class="btn-close-modal" id="btn-close-manager">✕</button>
+      </div>
+
+      <div class="manager-body">
+        <div class="manager-actions-row">
+          <button class="btn-danger" id="btn-reset-all-game">🗑️ Reset Toàn Bộ Game (Điểm + Bảng ô chữ)</button>
+          <button class="btn-secondary" id="btn-reset-board-only">🔄 Chỉ mở lại tất cả các ô chữ (Giữ nguyên điểm 6 nhóm)</button>
+          <button class="btn-secondary" id="btn-reset-dare-counts">♻️ Reset số lần lặp của 12 thẻ Dare</button>
+        </div>
+
+        <div class="manager-columns">
+          <div class="manager-col">
+            <h3>📘 Danh sách 14 Câu Hỏi Truth &amp; 4 Ô Đặc Biệt</h3>
+            <p class="manager-note">Bạn có thể click "Mở ngay" để bật câu hỏi đó lên màn hình hoặc đổi trạng thái Đã mở / Chưa mở.</p>
+            <div class="manager-list" id="manager-questions-list"></div>
+          </div>
+          <div class="manager-col">
+            <h3>🔥 Danh sách 12 Thử Thách Dare (Trong Docx)</h3>
+            <p class="manager-note">Click vào bất kỳ thử thách nào để phát trực tiếp lên màn hình.</p>
+            <div class="manager-list" id="manager-dares-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
